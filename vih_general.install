@@ -9,3 +9,12 @@
 function vih_general_update_7000() {
   module_disable(array('fixed_field'));
 }
+
+/**
+ * Fixes an issue where the vih.dk site has come into a broke state that gives
+ * a fatal error on admin/commerce.
+ */
+function vih_general_update_7001() {
+  db_query("DELETE FROM {menu_links} WHERE link_path = 'admin/commerce';");
+  drupal_flush_all_caches();
+}
